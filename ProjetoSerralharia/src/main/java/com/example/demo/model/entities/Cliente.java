@@ -22,17 +22,47 @@ public class Cliente {
 	private Long id;
 
 
-@Column(name="nome")
+@Column(name="nome", nullable = false)
 	private String nome;
+
+@Column(name="cpf", nullable = false)
+ private String cpf;
+
+@Column(name="telefone", nullable = false)
+ private String telefone;
 
 public Cliente() {
 	
 }
 
-public Cliente(String nome) {
+
+
+public Cliente(String nome, String cpf, String telefone) {
 	super();
 	this.nome = nome;
+	this.cpf = cpf;
+	this.telefone = telefone;
 }
+
+
+
+public String getCpf() {
+	return cpf;
+}
+
+public void setCpf(String cpf) {
+	this.cpf = cpf;
+}
+
+public String getTelefone() {
+	return telefone;
+}
+
+public void setTelefone(String telefone) {
+	this.telefone = telefone;
+}
+
+
 public Long getId() {
 	return id;
 }

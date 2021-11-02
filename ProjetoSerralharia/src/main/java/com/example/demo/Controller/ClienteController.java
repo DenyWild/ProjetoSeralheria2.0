@@ -27,8 +27,11 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 	
 	@PostMapping
-	public @ResponseBody Cliente novoCliente(@RequestParam String nome) {
-	Cliente cliente = new Cliente(nome);
+	public @ResponseBody Cliente novoCliente (
+			@RequestParam String nome,
+			@RequestParam String cpf,
+			@RequestParam String telefone) {
+	Cliente cliente = new Cliente(nome, cpf, telefone);
 
 	clienteRepository.save(cliente);
 	
