@@ -23,11 +23,11 @@ public class Cliente {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="id")
-	private Long id;
+	private Integer id;
 
 
 @Column(name="nome", nullable = false)
-@NotBlank(message = "Nome é obrigatório!")
+@NotBlank(message = " Nome é obrigatório!")
 	private String nome;
 
 @Column(name="cpf", nullable = false, unique = true)
@@ -71,10 +71,10 @@ public void setTelefone(String telefone) {
 }
 
 
-public Long getId() {
+public Integer getId() {
 	return id;
 }
-public void setId(Long id) {
+public void setId(Integer id) {
 	this.id = id;
 }
 public String getNome() {
