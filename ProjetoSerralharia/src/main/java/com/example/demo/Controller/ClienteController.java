@@ -2,6 +2,8 @@ package com.example.demo.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +29,7 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 	
 	@PostMapping
-	public @ResponseBody Cliente novoCliente (
-			@RequestParam String nome,
-			@RequestParam String cpf,
-			@RequestParam String telefone) {
-	Cliente cliente = new Cliente(nome, cpf, telefone);
-
+	public @ResponseBody Cliente novoCliente (@Valid Cliente cliente) {
 	clienteRepository.save(cliente);
 	
 	return cliente;

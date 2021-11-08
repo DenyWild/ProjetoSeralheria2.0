@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -23,12 +27,16 @@ public class Cliente {
 
 
 @Column(name="nome", nullable = false)
+@NotBlank(message = "Nome é obrigatório!")
 	private String nome;
 
-@Column(name="cpf", nullable = false)
+@Column(name="cpf", nullable = false, unique = true)
+@NotBlank(message = "Cpf é obrigatório!")
+@Size(min = 11, max = 11, message =" O campo Cpf deve ter 11 caracteres ")
  private String cpf;
 
 @Column(name="telefone", nullable = false)
+@NotBlank(message = "Telefone é obrigatório!")
  private String telefone;
 
 public Cliente() {
