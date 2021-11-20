@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,12 +31,15 @@ import com.example.demo.model.repositories.ClienteRepository;
 
 
 
+
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
 	
 //	@PostMapping
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
@@ -50,12 +55,12 @@ public class ClienteController {
 		Pageable page = PageRequest.of(numeroPagina, qtdPagina);
 		return clienteRepository.findAll(page);
 	}
-	
+
 @GetMapping
 public Iterable<Cliente> consultarClientes(){
 	return clienteRepository.findAll();
-	
 }
+
 
 @GetMapping(path = "/nome/{parteNome}")
 public Iterable<Cliente> ObterClientesPorNome(@PathVariable String parteNome){
@@ -77,6 +82,7 @@ public Optional<Cliente> obterClientePorId(@PathVariable Integer id){
 @DeleteMapping(path = "/{id}")
 public void excluirClientePorId(@PathVariable Integer id) {
 	clienteRepository.deleteById(id);
+
 }
 	
 }

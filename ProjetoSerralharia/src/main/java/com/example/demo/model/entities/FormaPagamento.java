@@ -1,20 +1,61 @@
 package com.example.demo.model.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+@Entity
+@Table
 public class FormaPagamento {
 
-	private Pessoa pessoa ;
-	private int id_pagamento;
-	private int tipopagamento;
-	private double especie ;
-	private double credito;
-	private double debito;
-	private double valortot;
-	private int Vezes;
-	double valJuros;
-	double TT;
 
-	public FormaPagamento(int tipopagamento, double especie, double credito, double debito, double valortot, int vezes) {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private int id_pagamento;
+	
+	@Column(nullable = false)
+	@NotNull(message = "Campo tipopagamento é obrigatorio")
+	private int tipopagamento;
+	@Column
+	@NotNull
+	private double especie ;
+	@Column
+	@NotNull
+	private double credito;
+	@Column
+	@NotNull
+	private double debito;
+	@Column(name = "valorTotal", nullable = false)
+	@NotNull
+	private double valortot;
+	@Column
+	@NotNull
+	private int Vezes;
+	@Column(name = "valorTotalComJuros")
+	private double valJuros;
+	@Column
+	@NotNull
+	private double TT;
+
+	
+	
+	
+	
+	public FormaPagamento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public FormaPagamento(@NotNull(message = "Campo tipopagamento é obrigatorio") int tipopagamento,
+			@NotNull double especie, @NotNull double credito, @NotNull double debito, @NotNull double valortot,
+			@NotNull int vezes, double valJuros, @NotNull double tT) {
 		super();
 		this.tipopagamento = tipopagamento;
 		this.especie = especie;
@@ -22,11 +63,9 @@ public class FormaPagamento {
 		this.debito = debito;
 		this.valortot = valortot;
 		Vezes = vezes;
+		this.valJuros = valJuros;
+		TT = tT;
 	}
-	
-	public FormaPagamento() {
-	}
-	
 	
 	
 	public void setTipopagamento(int tipopagamento, double total) {
@@ -36,6 +75,7 @@ public class FormaPagamento {
 			System.out.println("OBS: A PARTIR DE 4X NO CARTÃO ADICIONAL DE 7%");
 			System.out.println("CREDITO: ATE 10X ");
 			System.out.println("QUANTIDADE DE PARCELAS ?");
+			
 			break;
 		case 2:
 			System.out.println("DIRIJA-SE AO CAIXA POR FAVOR!");
@@ -252,11 +292,5 @@ public class FormaPagamento {
 		this.id_pagamento = id_pagamento;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+	
 }

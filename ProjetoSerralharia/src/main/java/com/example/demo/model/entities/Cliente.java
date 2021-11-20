@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -18,24 +21,27 @@ import lombok.Data;
 
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "cliente",  uniqueConstraints= @UniqueConstraint(columnNames = "cpf"))
 public class Cliente {
+	
+	//@OneToMany 
+	//@MapsId
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="id")
 	private Integer id;
 
 
-@Column(name="nome", nullable = false)
+@Column(name="nome", length = 70, nullable = false)
 @NotBlank(message = " Nome é obrigatório!")
 	private String nome;
 
-@Column(name="cpf", nullable = false, unique = true)
+@Column(name="cpf", length = 11,  nullable = false, unique = true)
 @NotBlank(message = "Cpf é obrigatório!")
 @Size(min = 11, max = 11, message =" O campo Cpf deve ter 11 caracteres ")
  private String cpf;
 
-@Column(name="telefone", nullable = false)
+@Column(name="telefone", length = 15, nullable = false)
 @NotBlank(message = "Telefone é obrigatório!")
  private String telefone;
 

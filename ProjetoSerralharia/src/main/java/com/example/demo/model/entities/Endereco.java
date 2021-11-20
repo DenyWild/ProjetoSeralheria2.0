@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -23,44 +24,50 @@ public class Endereco {
 	@Column(name="id_endereco")
 	private Integer id_endereco;
 	
-	@Column(name="rua", nullable = false)
+	@Column(name="rua",length = 50, nullable = false)
 	@NotBlank(message = "Campo rua é obrigatório")
 	private String rua;
 	
-	@Column(name="bairro", nullable = false)
+	@Column(name="bairro",length = 50, nullable = false)
 	@NotBlank(message = "Campo bairro é obrigatório")
 	private String bairro;
 	
-	@Column(name="estado", nullable = false)
+	@Column(name="estado", length = 30, nullable = false)
 	@NotBlank(message = "Campo estado é obrigatório")
 	private String estado;
 	
 	@Column(name="numero", nullable = false)
+	@NotNull(message = "Campo numero é obrigatório")
+	@Size(min = 1, max = 4, message = "O campo numero deve ter entre 1 e 4 caracteres")
 	private int numero;
 	
-	@Column(name="cidade", nullable = false)
+	@Column(name="cidade",length = 35, nullable = false)
 	@NotBlank(message = "Campo cidade é obrigatório")
 	private String cidade;
 	
-	@Column(name="cep", nullable = false)
+	@Column(name="cep",length = 8, nullable = false)
 	@NotBlank(message = "Campo cep é obrigatório")
-	@Size(min=8,max=8, message= "O cep tem que ter 8 caracteres")
+	@Size(min = 8, max = 8, message = "O campo cep tem que ter 8 caracteres")
 	private String cep;
 	
-	@Column(name="ponto_referencia", nullable = false)
+	@Column(name="ponto_referencia",  nullable = false)
 	@NotBlank(message = "Campo ponto de referencia é obrigatório")
 	private String pontRef;
 
-	
-	
+
 	public Endereco() {
-	
-	
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 
-
-	public Endereco(String rua, String bairro, String estado, int numero, String cidade, String cep, String pontRef) {
+	public Endereco(@NotBlank(message = "Campo rua é obrigatório") String rua,
+			@NotBlank(message = "Campo bairro é obrigatório") String bairro,
+			@NotBlank(message = "Campo estado é obrigatório") String estado,
+			@NotNull(message = "Campo numero é obrigatório") @Size(min = 1, max = 4, message = "O campo numero deve ter entre 1 e 4 caracteres") int numero,
+			@NotBlank(message = "Campo cidade é obrigatório") String cidade,
+			@NotBlank(message = "Campo cep é obrigatório") @Size(min = 8, max = 8, message = "O campo cep tem que ter 8 caracteres") String cep,
+			@NotBlank(message = "Campo ponto de referencia é obrigatório") String pontRef) {
 		super();
 		this.rua = rua;
 		this.bairro = bairro;
@@ -70,6 +77,9 @@ public class Endereco {
 		this.cep = cep;
 		this.pontRef = pontRef;
 	}
+
+
+
 
 
 
