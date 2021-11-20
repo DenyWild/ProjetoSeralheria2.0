@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,14 +27,16 @@ public class FormaPagamentoController {
  @Autowired
  private FormaPagamentoRepository fPagamentoRepository;
 	
-    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
+   // @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
+ @PostMapping
 	public  @ResponseBody FormaPagamento SalvarPagamentos(@Valid 
 			@RequestParam int tipopagamento ,
 			@RequestParam double especie,
 			@RequestParam double credito,
 			@RequestParam double debito, 
-			@RequestParam int Vezes) {
-    	FormaPagamento fpg = new FormaPagamento();
+			@RequestParam int vezes) {
+    	FormaPagamento fpg = new FormaPagamento(tipopagamento, especie, credito, debito, vezes);
+    	
 		 fPagamentoRepository.save(fpg);
 		 return fpg;
 	}

@@ -7,11 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 @SpringBootApplication
 public class ProjetoSerralhariaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjetoSerralhariaApplication.class, args);
+		SpringApplication.run(ProjetoSerralhariaApplication.class, args);	
 	}
-
 }

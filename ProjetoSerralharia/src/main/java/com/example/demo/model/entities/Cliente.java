@@ -24,6 +24,7 @@ import lombok.Data;
 @Table(name = "cliente",  uniqueConstraints= @UniqueConstraint(columnNames = "cpf"))
 public class Cliente {
 	
+	
 	//@OneToMany 
 	//@MapsId
 @Id
