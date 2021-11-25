@@ -36,10 +36,11 @@ private Integer id_pedido;
 
 	public Pedido(@NotBlank(message = "Campo tipopedido é obrigatorio") String tipopedido) {
 		super();
-		this.tipopedido = tipopedido;
-		setTipopedido(tipopedido);
-		getTipopedido(tipopedido);
+	this.tipopedido = tipopedido;
+    getTipopedido();
+
 	}
+	
 
 	
 	public Integer getId_pedido() {
@@ -52,34 +53,39 @@ private Integer id_pedido;
 	}
 
 
-	public String getTipopedido(String tipopedido) {
+	public String getTipopedido() {
 
+		if(tipopedido.equalsIgnoreCase("1")) {
+			tipopedido=("JANELA");
 		
-	
+		}
+		if(tipopedido.equalsIgnoreCase("2")) {
+			tipopedido=("PORTA");
+			
+		}
+		if(tipopedido.equalsIgnoreCase("3")) {
+			tipopedido=("PORTAO");
+		
+				}
+		if(tipopedido.equalsIgnoreCase("4")) {
+		    tipopedido=("TOLDO");
+		}
+		//ELSE COM MAU FUNCIONAMENTO
+		/*
+		   else {
+		    	tipopedido = ("PEDIDO INVALIDO");
+		    }*/
+			
+//
 		return tipopedido;
 	}
 
 	public void setTipopedido(String tipopedido) {
+		
 		this.tipopedido = tipopedido;
 		
-		if(tipopedido=="1") {
-			tipopedido ="JANELA";
-		}
-		if(tipopedido=="2") {
-			tipopedido ="PORTA";
-		}
-		if(tipopedido=="3") {
-			tipopedido ="PORTÃO";
-		}
-		if(tipopedido=="4") {
-			tipopedido ="TOLDO";
-		}else {
-			tipopedido = "invalido";
-		}
-		
+				
 	}
-
-
 
 	@Override
 	public String toString() {
