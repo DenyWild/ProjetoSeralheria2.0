@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.entities.Cliente;
 import com.example.demo.model.entities.Endereco;
+import com.example.demo.model.entities.FormaPagamento;
 import com.example.demo.model.repositories.EnderecoRepository;
+import com.example.demo.services.EnderecoService;
 
 @RestController
 @RequestMapping("/endereco")
@@ -28,33 +31,29 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	private EnderecoService enderecoService;
 
-	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-	public @ResponseBody Endereco salvarEndereco(@Valid Endereco endereco) {
-	enderecoRepository.save(endereco);
-	return endereco;
-}
-    /*@PutMapping
-    public Endereco alteraarEndereco(@Valid Endereco endereco) {
-    	enderecoRepository.save(endereco);
-    		return endereco;
-    }
-     */
-    @GetMapping
-    public Iterable<Endereco> mostrarEndereco(){
-    	return enderecoRepository.findAll();
-    	
-    }
-    
-    @GetMapping(path = "/{id_endereco}")
-    public Optional<Endereco> consultarEnderecoPorId(@PathVariable Integer id_endereco){
-    	return enderecoRepository.findById(id_endereco);
-    	
-    }
-    @DeleteMapping(path = "/{id_endereco}")
-    public void deletarEnderecoPorId(@PathVariable Integer id_endereco){
-    	enderecoRepository.deleteById(id_endereco);
-    	
-    }
-    
+	  @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
+		public  ResponseEntity<Endereco> SalvarEnderecos(@Valid Endereco endereco) {
+		  Endereco ende = enderecoService.salvarEnderecos(endereco);
+			return ResponseEntity.ok().body(ende);
+		}
+	    
+		@GetMapping
+		public Iterable<Endereco> ConsultarEnderecos(){
+			return enderecoService.mostrarEnderecos();
+		}
+		
+		@GetMapping(path = "/{id_endereco}")
+		public ResponseEntity<Endereco> ConsultarEnderecoporId(@PathVariable Integer id_endereco){
+			Endereco ende = enderecoService.findById(id_endereco);
+			return ResponseEntity.ok().body(ende);
+			
+			
+		}
+		@DeleteMapping(path = "/{id_endereco}")
+		public void ExcluirEnderecoporId(@PathVariable Integer id_endereco) {
+			enderecoService.deletarEnderecoPorId(id_endereco);
+		}
 }

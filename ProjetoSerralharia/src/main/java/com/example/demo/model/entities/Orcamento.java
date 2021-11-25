@@ -1,13 +1,11 @@
 package com.example.demo.model.entities;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -56,16 +54,19 @@ public class Orcamento {
 	public Orcamento(@NotNull(message = "Campo precoAluminio é obrigatório") double precoAluminio,
 			@NotNull(message = "Campo altura é obrigatório") double altura,
 			@NotNull(message = "Campo largura é obrigatório") double largura,
-			@NotNull(message = "Campo metrosqd é obrigatório") double metrosqd,
-			@NotNull(message = "Campo tipomaterial é obrigatório") int tipomaterial,
-			@NotNull(message = "Campo total é obrigatório") double total) {
+			//@NotNull(message = "Campo metrosqd é obrigatório") double metrosqd,
+			@NotNull(message = "Campo tipomaterial é obrigatório") int tipomaterial)
+			//@NotNull(message = "Campo total é obrigatório") double total) 
+			{
 		super();
 		this.precoAluminio = precoAluminio;
 		this.altura = altura;
 		this.largura = largura;
-		this.metrosqd = metrosqd;
+		//this.metrosqd = metrosqd;
 		this.tipomaterial = tipomaterial;
-		this.total = total;
+		//this.total = total;
+		setMetrosqd(altura,largura);
+		getTotal(tipomaterial);
 	}
 
 	public Integer getId_orcamento() {
@@ -95,10 +96,12 @@ public class Orcamento {
 		this.largura = largura;
 	}
 	public double getMetrosqd() {
-		return getAltura() * getLargura() ;
+		
+		return metrosqd;
 	}
-	public void setMetrosqd(double metrosqd) {
-		this.metrosqd = metrosqd;
+	public void setMetrosqd(double altura ,double largura) {
+		
+		metrosqd = altura * largura;
 	}
 	public int getTipomaterial() {
 		return tipomaterial;
@@ -123,18 +126,20 @@ public class Orcamento {
 		switch (tipomaterial) {
 		case 1:
 			int cor1=35;
-			total=((getMetrosqd() * cor1)*5);
-			this.tipomaterial = tipomaterial;
+			setTotal((getMetrosqd() * cor1)*5);
+			
 			break;
 		case 2:
 			int cor2=40;
-			total=((getMetrosqd() * cor2)*5);
-			this.tipomaterial = tipomaterial;
+			setTotal((getMetrosqd() * cor2)*5);
+			
 			break;
 		}
 		return total;
 	}
 	public void setTotal(double total) {
+		
+		
 		this.total = total;
 	}
 	@Override

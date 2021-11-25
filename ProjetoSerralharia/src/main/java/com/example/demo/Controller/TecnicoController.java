@@ -1,42 +1,37 @@
 package com.example.demo.Controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.entities.Pessoa;
 import com.example.demo.model.entities.Tecnico;
-import com.example.demo.model.repositories.PessoaRepository;
-import com.example.demo.model.repositories.TecnicoRepository;
+import com.example.demo.services.TecnicoService;
 
 @RestController
 @RequestMapping("/tecnico")
 public class TecnicoController {
 
 	@Autowired
-	private TecnicoRepository tecnicoRepository;
+	private TecnicoService tecnicoService;
 	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-	public @ResponseBody Tecnico salvarTecnico (@Valid Tecnico tecnico) {
-		tecnicoRepository.save(tecnico);
-	return tecnico;
+	public ResponseEntity<Tecnico> SalvarTecnico (@Valid Tecnico tecnico) {
+	Tecnico tec = tecnicoService.salvarTecnico(tecnico);
+	return ResponseEntity.ok().body(tec);
 }
 	
 
 
 @GetMapping
-public Iterable<Tecnico> consultarTecnicos(){
-	return tecnicoRepository.findAll();
+public Iterable<Tecnico> ConsultarTecnicos(){
+	return tecnicoService.consultarTecnicos();
 }
 
 /*
@@ -47,14 +42,15 @@ public Iterable<Pessoa> ObterClientesPorNome(@PathVariable String parteNome){
 }*/
 
 @GetMapping(path = "/{id_tecnico}")
-public Optional<Tecnico> obterTecnicoPorId(@PathVariable Integer id_tecnico){
-	return tecnicoRepository.findById(id_tecnico);
+public ResponseEntity<Tecnico> ObterTecnicoPorId(@PathVariable Integer id_tecnico){
+	Tecnico tec = tecnicoService.findById(id_tecnico);
+	return ResponseEntity.ok().body(tec);
 }
 
 
 @DeleteMapping(path = "/{id_tecnico}")
-public void excluirTecnicpPorId(@PathVariable Integer id_tecnico) {
-	tecnicoRepository.deleteById(id_tecnico);
+public void ExcluirTecnicpPorId(@PathVariable Integer id_tecnico) {
+	tecnicoService.excluirTecnicpPorId(id_tecnico);
 
 }
 	

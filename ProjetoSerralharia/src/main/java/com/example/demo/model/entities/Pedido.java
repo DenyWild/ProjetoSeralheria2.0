@@ -7,9 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Columns;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -40,6 +37,8 @@ private Integer id_pedido;
 	public Pedido(@NotBlank(message = "Campo tipopedido é obrigatorio") String tipopedido) {
 		super();
 		this.tipopedido = tipopedido;
+		setTipopedido(tipopedido);
+		getTipopedido(tipopedido);
 	}
 
 	
@@ -53,7 +52,15 @@ private Integer id_pedido;
 	}
 
 
-	public String getTipopedido() {
+	public String getTipopedido(String tipopedido) {
+
+		
+	
+		return tipopedido;
+	}
+
+	public void setTipopedido(String tipopedido) {
+		this.tipopedido = tipopedido;
 		
 		if(tipopedido=="1") {
 			tipopedido ="JANELA";
@@ -66,15 +73,9 @@ private Integer id_pedido;
 		}
 		if(tipopedido=="4") {
 			tipopedido ="TOLDO";
+		}else {
+			tipopedido = "invalido";
 		}
-		
-		
-		return tipopedido;
-	}
-
-	public void setTipopedido(String tipopedido) {
-		this.tipopedido = tipopedido;
-		
 		
 	}
 
