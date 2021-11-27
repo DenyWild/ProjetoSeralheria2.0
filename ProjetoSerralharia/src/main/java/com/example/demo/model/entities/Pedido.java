@@ -54,37 +54,30 @@ private Integer id_pedido;
 
 
 	public String getTipopedido() {
+		
 
 		if(tipopedido.equalsIgnoreCase("1")) {
 			tipopedido=("JANELA");
-		
 		}
 		if(tipopedido.equalsIgnoreCase("2")) {
 			tipopedido=("PORTA");
-			
 		}
 		if(tipopedido.equalsIgnoreCase("3")) {
 			tipopedido=("PORTAO");
-		
 				}
 		if(tipopedido.equalsIgnoreCase("4")) {
 		    tipopedido=("TOLDO");
 		}
-		//ELSE COM MAU FUNCIONAMENTO
-		/*
-		   else {
-		    	tipopedido = ("PEDIDO INVALIDO");
-		    }*/
-			
-//
+	    // else {
+	    //	
+	    //	 }
 		return tipopedido;
 	}
 
 	public void setTipopedido(String tipopedido) {
 		
 		this.tipopedido = tipopedido;
-		
-				
+			
 	}
 
 	@Override

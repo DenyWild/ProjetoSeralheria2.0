@@ -26,8 +26,12 @@ public class PedidoService {
 	
 	//METODO POST E PUT NA MESMA FUNÇÃO 
 	public @ResponseBody Pedido salvarPedido(@Valid Pedido pedido) {
-		pedidoRepository.save(pedido);
-		return pedido;
+		 Pedido result = null;
+		 
+		Pedido procurado = this.pedidoRepository.save(pedido);
+		result = procurado;
+		 result.setTipopedido(pedido.getTipopedido());
+		return this.pedidoRepository.save(result);
 		
 	}
    //METODO GET FIND ALL
