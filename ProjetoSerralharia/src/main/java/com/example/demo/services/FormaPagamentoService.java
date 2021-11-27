@@ -26,8 +26,12 @@ public class FormaPagamentoService {
 	}
 	//METODO POST E PUT NA MESMA FUNÇÃO
     public  @ResponseBody FormaPagamento salvarPagamentos(@Valid FormaPagamento formapagamento) {
-    	fPagamentoRepository.save(formapagamento);
-		 return formapagamento;}
+    	FormaPagamento result = null;
+    	FormaPagamento atual = fPagamentoRepository.save(formapagamento);
+    	result = atual;
+    	result.setTipopagamento(formapagamento.getTipopagamento());
+		 return this.fPagamentoRepository.save(result);
+		 }
     //METODO GET FIND ALL
     public Iterable<FormaPagamento> consultarFormasdePagamentos(){
 		return fPagamentoRepository.findAll();

@@ -28,8 +28,8 @@ public class PedidoService {
 	public @ResponseBody Pedido salvarPedido(@Valid Pedido pedido) {
 		 Pedido result = null;
 		 
-		Pedido procurado = this.pedidoRepository.save(pedido);
-		result = procurado;
+		Pedido atual = this.pedidoRepository.save(pedido);
+		result = atual;
 		 result.setTipopedido(pedido.getTipopedido());
 		return this.pedidoRepository.save(result);
 		

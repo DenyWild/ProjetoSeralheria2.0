@@ -34,6 +34,7 @@ public class FormaPagamento {
 	public FormaPagamento(@NotBlank(message = "Campo tipopagamento é obrigatório") String tipopagamento) {
 		super();
 		this.tipopagamento = tipopagamento;
+		getTipopagamento();
 	}
 
 	public Integer getId_pagamento() {
@@ -45,6 +46,17 @@ public class FormaPagamento {
 	}
 
 	public String getTipopagamento() {
+		
+		if(tipopagamento.equalsIgnoreCase("1")) {
+			tipopagamento = ("Credito");
+		}
+		if(tipopagamento.equalsIgnoreCase("2")) {
+			tipopagamento = ("Debito");
+		}
+		if(tipopagamento.equalsIgnoreCase("3")) {
+			tipopagamento = ("Especie");
+		}
+		
 		return tipopagamento;
 	}
 
