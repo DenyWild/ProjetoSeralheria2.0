@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @MappedSuperclass
 @Data
 @Table(name = "pessoa",  uniqueConstraints= @UniqueConstraint(columnNames = "cpf"))
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Pessoa {
 
 
