@@ -25,12 +25,13 @@ public class PedidoService {
 	}
 	
 	//METODO POST E PUT NA MESMA FUNÇÃO 
-	public @ResponseBody Pedido salvarPedido(@Valid Pedido pedido) {
-		 Pedido result = null;
-		 
+	public @ResponseBody Pedido salvarPedido(@Valid Pedido pedido) throws IllegalAccessException
+	{
+		Pedido result = null;
+
 		Pedido atual = this.pedidoRepository.save(pedido);
 		result = atual;
-		 result.setTipopedido(pedido.getTipopedido());
+		result.setTipoPedido(pedido.getTipoPedido());
 		return this.pedidoRepository.save(result);
 		
 	}

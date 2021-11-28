@@ -8,11 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.example.demo.model.entities.enums.TipoPedido;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Table
 public class Pedido {
@@ -23,8 +24,8 @@ public class Pedido {
 private Integer id_pedido;
 	
 	@Column
-	@NotBlank(message = "Campo tipopedido é obrigatorio")
-	private String tipopedido;
+//	@NotBlank(message = "Campo tipopedido é obrigatorio")
+	private Integer tipoPedido;
 	
 	
 	
@@ -34,54 +35,64 @@ private Integer id_pedido;
 	}
 
 
-	public Pedido(@NotBlank(message = "Campo tipopedido é obrigatorio") String tipopedido) {
+	public Pedido(TipoPedido tipoPedido)
+	{
 		super();
-	this.tipopedido = tipopedido;
-    getTipopedido();
+		this.tipoPedido = (tipoPedido == null) ? null : tipoPedido.getCod();
 
 	}
-	
 
-	
-	public Integer getId_pedido() {
+	public Integer getId_pedido()
+	{
 		return id_pedido;
 	}
 
 
-	public void setId_pedido(Integer id_pedido) {
+	public void setId_pedido(Integer id_pedido)
+	{
 		this.id_pedido = id_pedido;
 	}
 
-
-	public String getTipopedido() {
-		
-
-		if(tipopedido.equalsIgnoreCase("1")) {
-			tipopedido=("JANELA");
-		}
-		if(tipopedido.equalsIgnoreCase("2")) {
-			tipopedido=("PORTA");
-		}
-		if(tipopedido.equalsIgnoreCase("3")) {
-			tipopedido=("PORTAO");
-				}
-		if(tipopedido.equalsIgnoreCase("4")) {
-		    tipopedido=("TOLDO");
-		}
-	    // else {
-	    //	
-	    //	 }
-		return tipopedido;
+	public TipoPedido getTipoPedido() throws IllegalAccessException
+	{
+		return TipoPedido.toEnum(tipoPedido);
 	}
 
-	public void setTipopedido(String tipopedido) {
-		
-		this.tipopedido = tipopedido;
-			
+	public void setTipoPedido(TipoPedido tipoPedido)
+	{
+		this.tipoPedido = tipoPedido.getCod();
 	}
+
+
+//	public String getTipopedido() {
+//
+//
+//		if(tipopedido.equalsIgnoreCase("1")) {
+//			tipopedido=("JANELA");
+//		}
+//		if(tipopedido.equalsIgnoreCase("2")) {
+//			tipopedido=("PORTA");
+//		}
+//		if(tipopedido.equalsIgnoreCase("3")) {
+//			tipopedido=("PORTAO");
+//				}
+//		if(tipopedido.equalsIgnoreCase("4")) {
+//		    tipopedido=("TOLDO");
+//		}
+//	    // else {
+//	    //
+//	    //	 }
+//		return tipopedido;
+//	}
+//
+//	public void setTipopedido(String tipopedido) {
+//
+//		this.tipopedido = tipopedido;
+//
+//	}
 
 	@Override
 	public String toString() {
-		return ""+this.tipopedido ;
+		return ""+this.tipoPedido ;
 	}
 }

@@ -4,12 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.entities.Pedido;
 import com.example.demo.services.PedidoService;
@@ -22,13 +17,16 @@ public class PedidoController {
 	private PedidoService pedidoService;
 	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
-	public  ResponseEntity<Pedido> SalvarPedido(@Valid Pedido pedido) {
+	public  ResponseEntity<Pedido> SalvarPedido(@Valid @RequestBody Pedido pedido) throws IllegalAccessException
+	{
+
 		Pedido ped = pedidoService.salvarPedido(pedido);
 		return ResponseEntity.ok().body(ped);
 		
 	}
 	@GetMapping
-	public Iterable<Pedido> ConsultarPedidos(){
+	public Iterable<Pedido> ConsultarPedidos()
+	{
 		return pedidoService.consultarPedidos();
 	}
 	
