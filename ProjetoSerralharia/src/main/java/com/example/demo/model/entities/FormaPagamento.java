@@ -2,18 +2,16 @@ package com.example.demo.model.entities;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import com.example.demo.model.entities.enums.FormaPag;
 @Entity
 @Table
 public class FormaPagamento {
 
+	//@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinColumn(name = "pedido_id")
+	//private Pedido pedido;
 
 
 	@Id
@@ -31,9 +29,9 @@ public class FormaPagamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FormaPagamento(FormaPag formapag ){
+	public FormaPagamento(FormaPag formapag ) {
 		super();
-		this.formaPag = (formapag == null) ? null: formapag.getCod();
+		this.formaPag = (formapag == null) ? null : formapag.getCod();
 	}
 
 	public Integer getId_pagamento() {

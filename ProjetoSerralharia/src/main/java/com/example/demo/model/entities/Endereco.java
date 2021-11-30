@@ -1,6 +1,11 @@
 package com.example.demo.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,11 +14,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+@Data
+@Getter
+@Setter
 @Entity
 @Table(name="endereco")
 public class Endereco {
 
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,7 +85,13 @@ public class Endereco {
 		this.pontRef = pontRef;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
 
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public Integer getId_endereco() {
 		return id_endereco;

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.example.demo.model.entities.Orcamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,8 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteService clienteService;
-	
+
+
 
 @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
 public  ResponseEntity<Cliente> SalvarClientes(@RequestBody @Valid Cliente cliente) {
@@ -62,5 +64,12 @@ public Optional<Cliente> ObterClientesPorCpf(@PathVariable String cpf){
 	return clienteService.ObterClientesPorCpf(cpf);
 	
 }
+
+
+	@PutMapping(path = "/{id}")
+	public Cliente AlterarClientes (@PathVariable Integer id, @RequestBody Cliente cliente ) {
+		return this.clienteService.alterar(id,cliente);
+
+	}
 
 }

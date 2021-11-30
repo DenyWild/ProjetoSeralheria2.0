@@ -16,7 +16,8 @@ import javax.validation.constraints.Size;
 @Table(name = "cliente")
 public class Cliente {
 
-
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos = new ArrayList<>();
 	//@OneToMany 
 	//@MapsId
 @Id
@@ -51,6 +52,13 @@ public Cliente(String nome, String cpf, String telefone) {
 }
 
 
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
 	public String getCpf() {
 	return cpf;

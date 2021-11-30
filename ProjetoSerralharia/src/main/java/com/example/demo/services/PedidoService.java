@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import javax.validation.Valid;
 
+import com.example.demo.model.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;

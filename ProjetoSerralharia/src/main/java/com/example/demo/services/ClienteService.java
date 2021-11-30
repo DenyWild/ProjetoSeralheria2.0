@@ -4,11 +4,14 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.example.demo.model.entities.Orcamento;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.entities.Cliente;
@@ -21,7 +24,6 @@ public class ClienteService {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
 	//METODO GET FIND BY ID
 public Cliente findById( Integer id) {
 		
@@ -29,13 +31,40 @@ public Cliente findById( Integer id) {
 				() -> new EntityNotFoundException("Id not found "+id));
 	}
 
-//METODO POST E PUT NA MESMA FUNÇÃO
-public @ResponseBody Cliente salvarClientes (@Valid Cliente cliente) {
-	clienteRepository.save(cliente);
-	return cliente;
+//METODO POST
+public @ResponseBody Cliente salvarClientes (@Valid @RequestBody Cliente c) {
+	c.getEnderecos().forEach( e -> e.setCliente(c));
+	return clienteRepository.save(c);
 	
 }
-//METODO GET POR PAGINA APENAS PARA CLASSE CLIENTE
+/*
+//METODO PUT
+public Cliente alterarCliente (@PathVariable Integer id, Cliente c ){
+	Cliente clienteSalva = findById(id);
+
+	clienteSalva.getEnderecos().clear();
+
+	clienteSalva.getEnderecos().addAll(c.getEnderecos());
+
+	BeanUtils.copyProperties(c, clienteSalva, "id", "enderecos");
+
+	return this.clienteRepository.save(clienteSalva);
+}
+*/
+
+	public Cliente alterar (@PathVariable Integer id, @RequestBody Cliente cliente  ) {
+		Optional<Cliente> procurado = this.clienteRepository.findById(id);
+		Cliente result = null;
+
+
+		result = procurado.get();
+		result.getEnderecos().addAll(cliente.getEnderecos());
+		BeanUtils.copyProperties(cliente, procurado, "id", "enderecos");
+		return this.clienteRepository.save(result);
+
+	}
+
+	//METODO GET POR PAGINA APENAS PARA CLASSE CLIENTE
 public Iterable<Cliente> obterClientePorPagina(@PathVariable int numeroPagina, 
 		@PathVariable int qtdPagina){
 	if(qtdPagina >= 5) qtdPagina = 5;

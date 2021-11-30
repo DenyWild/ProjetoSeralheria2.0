@@ -14,12 +14,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
 //@NoArgsConstructor
 @AllArgsConstructor
 @Table
+@Getter
+@Setter
 public class Pedido {
+
+//@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pedido")
+   // private FormaPagamento formapag;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +55,8 @@ private FormaPagamento formapagamento;
         this.tipoPedido = (tipoPedido == null) ? null : tipoPedido.getCod();
         this.datapedido = LocalDateTime.now();
     }
+
+
 
     public Integer getId_pedido() {
         return id_pedido;
