@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.entities.Pedido;
@@ -25,13 +26,14 @@ public class PedidoService {
 	}
 	
 	//METODO POST E PUT NA MESMA FUNÇÃO 
-	public @ResponseBody Pedido salvarPedido(@Valid Pedido pedido) throws IllegalAccessException
+	public @ResponseBody Pedido salvarPedido(@RequestBody Pedido pedido) throws IllegalAccessException
 	{
 		Pedido result = null;
 
 		Pedido atual = this.pedidoRepository.save(pedido);
 		result = atual;
 		result.setTipoPedido(pedido.getTipoPedido());
+		result.setDatapedido(pedido.getDatapedido());
 		return this.pedidoRepository.save(result);
 		
 	}

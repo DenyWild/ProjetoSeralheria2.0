@@ -4,12 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.entities.Tecnico;
 import com.example.demo.services.TecnicoService;
@@ -22,7 +17,7 @@ public class TecnicoController {
 	private TecnicoService tecnicoService;
 	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-	public ResponseEntity<Tecnico> SalvarTecnico (@Valid Tecnico tecnico) {
+	public ResponseEntity<Tecnico> SalvarTecnico (@RequestBody @Valid Tecnico tecnico) {
 	Tecnico tec = tecnicoService.salvarTecnico(tecnico);
 	return ResponseEntity.ok().body(tec);
 }

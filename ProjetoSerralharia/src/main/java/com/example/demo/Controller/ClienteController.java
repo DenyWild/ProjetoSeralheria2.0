@@ -6,12 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.entities.Cliente;
 import com.example.demo.services.ClienteService;
@@ -26,7 +21,7 @@ public class ClienteController {
 	
 
 @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
-public  ResponseEntity<Cliente> SalvarClientes(@Valid Cliente cliente) {
+public  ResponseEntity<Cliente> SalvarClientes(@RequestBody @Valid Cliente cliente) {
 	Cliente cli = clienteService.salvarClientes(cliente) ;
 	return ResponseEntity.ok().body(cli);
 }

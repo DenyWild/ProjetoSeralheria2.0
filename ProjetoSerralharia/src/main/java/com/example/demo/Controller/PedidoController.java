@@ -19,7 +19,6 @@ public class PedidoController {
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT} )
 	public  ResponseEntity<Pedido> SalvarPedido(@Valid @RequestBody Pedido pedido) throws IllegalAccessException
 	{
-
 		Pedido ped = pedidoService.salvarPedido(pedido);
 		return ResponseEntity.ok().body(ped);
 		

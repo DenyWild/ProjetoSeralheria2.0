@@ -25,11 +25,11 @@ public class FormaPagamentoService {
 				() -> new EntityNotFoundException("Id not found "+id));
 	}
 	//METODO POST E PUT NA MESMA FUNÇÃO
-    public  @ResponseBody FormaPagamento salvarPagamentos(@Valid FormaPagamento formapagamento) {
+    public  @ResponseBody FormaPagamento salvarPagamentos(@Valid FormaPagamento formapagamento) throws IllegalAccessException {
     	FormaPagamento result = null;
     	FormaPagamento atual = fPagamentoRepository.save(formapagamento);
     	result = atual;
-    	result.setTipopagamento(formapagamento.getTipopagamento());
+    	result.setFormaPag(formapagamento.getFormaPag());
 		 return this.fPagamentoRepository.save(result);
 		 }
     //METODO GET FIND ALL

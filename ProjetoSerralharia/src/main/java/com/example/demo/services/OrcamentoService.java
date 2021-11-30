@@ -52,7 +52,7 @@ public class OrcamentoService {
 		}
 		
      //METODO PUT DIFERENTE APENAS PARA A CLASSE ORCAMENTO
-		public Orcamento test (@PathVariable("id_orcamento") int id_orcamento, @RequestBody Orcamento newOrcamento  ) {
+		public Orcamento test (@PathVariable("id_orcamento") Integer id_orcamento, @RequestBody Orcamento newOrcamento  ) {
 	            Optional<Orcamento> procurado = this.orcamentoRepository.findById(id_orcamento);
 	            Orcamento result = null;
 

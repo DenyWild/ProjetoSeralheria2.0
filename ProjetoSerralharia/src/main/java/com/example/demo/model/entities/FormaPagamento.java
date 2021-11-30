@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
+import com.example.demo.model.entities.enums.FormaPag;
 @Entity
 @Table
 public class FormaPagamento {
@@ -22,8 +22,8 @@ public class FormaPagamento {
 	private Integer id_pagamento;
 	
 	@Column
-	@NotBlank(message = "Campo tipopagamento é obrigatório")
-    private String tipopagamento;
+//	@NotBlank(message = "Campo tipopagamento é obrigatório")
+    private Integer formaPag;
 
 	
 	public FormaPagamento() {
@@ -31,10 +31,9 @@ public class FormaPagamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FormaPagamento(@NotBlank(message = "Campo tipopagamento é obrigatório") String tipopagamento) {
+	public FormaPagamento(FormaPag formapag ){
 		super();
-		this.tipopagamento = tipopagamento;
-		getTipopagamento();
+		this.formaPag = (formapag == null) ? null: formapag.getCod();
 	}
 
 	public Integer getId_pagamento() {
@@ -45,6 +44,15 @@ public class FormaPagamento {
 		this.id_pagamento = id_pagamento;
 	}
 
+	public FormaPag getFormaPag()  throws IllegalAccessException{
+		return FormaPag.toEnum(formaPag);
+	}
+
+	public void setFormaPag(FormaPag formapag) {
+		this.formaPag = formapag.getCod();
+	}
+
+	/*
 	public String getTipopagamento() {
 		
 		if(tipopagamento.equalsIgnoreCase("1")) {
@@ -81,7 +89,7 @@ public class FormaPagamento {
 		return id_pagamento == other.id_pagamento && Objects.equals(tipopagamento, other.tipopagamento);
 	}
 	
-	
+	*/
 
 
 }

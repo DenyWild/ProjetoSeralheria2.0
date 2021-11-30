@@ -13,10 +13,11 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 @MappedSuperclass
 @Data
-@Table(name = "pessoa",  uniqueConstraints= @UniqueConstraint(columnNames = "cpf"))
+@Table(name = "pessoa")
 //@NoArgsConstructor
 public class Pessoa {
 
@@ -34,9 +35,9 @@ public class Pessoa {
 	@Column(name = "telefone", length = 15, nullable = false)
 	@NotBlank(message = "O campo telefone é obrigatório")
 	private String telefone;
-	
-	@Column(name = "cpf", length = 11, nullable = false, unique = true)
-	@NotBlank(message = "O campo cpf é obrigatório")
+
+	@Column
+    @CPF
 	private String Cpf;
 	
 	

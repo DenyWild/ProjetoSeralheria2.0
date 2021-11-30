@@ -1,24 +1,22 @@
 package com.example.demo.model.entities;
 
+import org.hibernate.validator.constraints.br.CPF;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
 
 @Entity
-@Table(name = "cliente",  uniqueConstraints= @UniqueConstraint(columnNames = "cpf"))
+@Table(name = "cliente")
 public class Cliente {
-	
-	
+
+
 	//@OneToMany 
 	//@MapsId
 @Id
@@ -31,9 +29,8 @@ public class Cliente {
 @NotBlank(message = " Nome é obrigatório!")
 	private String nome;
 
-@Column(name="cpf", length = 11,  nullable = false, unique = true)
-@NotBlank(message = "Cpf é obrigatório!")
-@Size(min = 11, max = 11, message =" O campo Cpf deve ter 11 caracteres ")
+@Column
+@CPF
  private String cpf;
 
 @Column(name="telefone", length = 15, nullable = false)
@@ -55,7 +52,7 @@ public Cliente(String nome, String cpf, String telefone) {
 
 
 
-public String getCpf() {
+	public String getCpf() {
 	return cpf;
 }
 

@@ -1,13 +1,11 @@
 package com.example.demo.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,6 +13,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="endereco")
 public class Endereco {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,21 +34,21 @@ public class Endereco {
 	
 	@Column(name="numero", nullable = false)
 	@NotNull(message = "Campo numero é obrigatório")
-	@Size(min = 1, max = 4, message = "O campo numero deve ter entre 1 e 4 caracteres")
-	private int numero;
+	private Integer numero;
 	
 	@Column(name="cidade",length = 35, nullable = false)
 	@NotBlank(message = "Campo cidade é obrigatório")
 	private String cidade;
 	
-	@Column(name="cep",length = 8, nullable = false)
+	@Column(name="cep", nullable = false)
 	@NotBlank(message = "Campo cep é obrigatório")
-	@Size(min = 8, max = 8, message = "O campo cep tem que ter 8 caracteres")
 	private String cep;
 	
 	@Column(name="ponto_referencia",  nullable = false)
 	@NotBlank(message = "Campo ponto de referencia é obrigatório")
 	private String pontRef;
+
+
 
 
 	public Endereco() {
@@ -61,7 +60,7 @@ public class Endereco {
 	public Endereco(@NotBlank(message = "Campo rua é obrigatório") String rua,
 			@NotBlank(message = "Campo bairro é obrigatório") String bairro,
 			@NotBlank(message = "Campo estado é obrigatório") String estado,
-			@NotNull(message = "Campo numero é obrigatório") @Size(min = 1, max = 4, message = "O campo numero deve ter entre 1 e 4 caracteres") int numero,
+			@NotNull(message = "Campo numero é obrigatório") @Size(min = 1, max = 4, message = "O campo numero deve ter entre 1 e 4 caracteres") Integer numero,
 			@NotBlank(message = "Campo cidade é obrigatório") String cidade,
 			@NotBlank(message = "Campo cep é obrigatório") @Size(min = 8, max = 8, message = "O campo cep tem que ter 8 caracteres") String cep,
 			@NotBlank(message = "Campo ponto de referencia é obrigatório") String pontRef) {
@@ -74,9 +73,6 @@ public class Endereco {
 		this.cep = cep;
 		this.pontRef = pontRef;
 	}
-
-
-
 
 
 
@@ -128,13 +124,13 @@ public class Endereco {
 
 
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
 
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
